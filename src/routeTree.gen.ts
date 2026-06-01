@@ -23,6 +23,7 @@ import { Route as FaseProjetoRouteImport } from './routes/fase-projeto'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
 import { Route as AncoragemLinhaDeVidaRouteImport } from './routes/ancoragem-linha-de-vida'
+import { Route as IndexRouteImport } from './routes/index'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -94,8 +95,14 @@ const AncoragemLinhaDeVidaRoute = AncoragemLinhaDeVidaRouteImport.update({
   path: '/ancoragem-linha-de-vida',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/videos': typeof VideosRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
@@ -129,6 +137,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
@@ -147,6 +156,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
@@ -163,6 +173,7 @@ export interface FileRouteTypes {
     | '/videos'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/videos'
   id:
     | '__root__'
+    | '/'
     | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
@@ -196,6 +208,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AncoragemLinhaDeVidaRoute: typeof AncoragemLinhaDeVidaRoute
   ComoTrabalhamosRoute: typeof ComoTrabalhamosRoute
   ContatoRoute: typeof ContatoRoute
@@ -312,10 +325,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AncoragemLinhaDeVidaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AncoragemLinhaDeVidaRoute: AncoragemLinhaDeVidaRoute,
   ComoTrabalhamosRoute: ComoTrabalhamosRoute,
   ContatoRoute: ContatoRoute,
