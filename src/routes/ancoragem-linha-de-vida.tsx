@@ -89,6 +89,13 @@ function AncoragemLandingPage() {
         <main>
           <HeroVariant />
           <TypesVariant />
+          <div className="bg-brand-gray pt-12">
+            <p className="mx-auto max-w-3xl px-4 text-center text-base sm:text-lg text-muted-foreground">
+              Cada sistema de ancoragem é desenvolvido considerando a estrutura
+              existente, as cargas aplicadas e os riscos da atividade,
+              garantindo máxima segurança operacional e conformidade normativa.
+            </p>
+          </div>
           <Services />
           <HowWeWorkVariant />
           <ProjectPhaseVariant />
