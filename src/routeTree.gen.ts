@@ -22,6 +22,7 @@ import { Route as InspecoesRouteImport } from './routes/inspecoes'
 import { Route as FaseProjetoRouteImport } from './routes/fase-projeto'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
+import { Route as AncoragemLinhaDeVidaRouteImport } from './routes/ancoragem-linha-de-vida'
 import { Route as IndexRouteImport } from './routes/index'
 
 const VideosRoute = VideosRouteImport.update({
@@ -89,6 +90,11 @@ const ComoTrabalhamosRoute = ComoTrabalhamosRouteImport.update({
   path: '/como-trabalhamos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AncoragemLinhaDeVidaRoute = AncoragemLinhaDeVidaRouteImport.update({
+  id: '/ancoragem-linha-de-vida',
+  path: '/ancoragem-linha-de-vida',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -97,6 +103,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
   '/fase-projeto': typeof FaseProjetoRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
   '/fase-projeto': typeof FaseProjetoRoute
@@ -130,6 +138,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ancoragem-linha-de-vida': typeof AncoragemLinhaDeVidaRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
   '/contato': typeof ContatoRoute
   '/fase-projeto': typeof FaseProjetoRoute
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
     | '/fase-projeto'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
     | '/fase-projeto'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/ancoragem-linha-de-vida'
     | '/como-trabalhamos'
     | '/contato'
     | '/fase-projeto'
@@ -197,6 +209,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AncoragemLinhaDeVidaRoute: typeof AncoragemLinhaDeVidaRoute
   ComoTrabalhamosRoute: typeof ComoTrabalhamosRoute
   ContatoRoute: typeof ContatoRoute
   FaseProjetoRoute: typeof FaseProjetoRoute
@@ -305,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComoTrabalhamosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ancoragem-linha-de-vida': {
+      id: '/ancoragem-linha-de-vida'
+      path: '/ancoragem-linha-de-vida'
+      fullPath: '/ancoragem-linha-de-vida'
+      preLoaderRoute: typeof AncoragemLinhaDeVidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -317,6 +337,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AncoragemLinhaDeVidaRoute: AncoragemLinhaDeVidaRoute,
   ComoTrabalhamosRoute: ComoTrabalhamosRoute,
   ContatoRoute: ContatoRoute,
   FaseProjetoRoute: FaseProjetoRoute,
@@ -334,12 +355,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
