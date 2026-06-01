@@ -81,7 +81,7 @@ export const Route = createFileRoute("/ancoragem-linha-de-vida")({
 const SCOPE_DISCLAIMER =
   "Atuamos exclusivamente com projetos, inspeção e instalação. Não comercializamos peças, EPIs ou equipamentos avulsos.";
 
-function AncoragemLandingPage() {
+export function AncoragemLandingPage() {
   return (
     <ContactDialogProvider>
       <div className="min-h-screen bg-background">
